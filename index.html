@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0"
+        />
+        <title>Multipli(City)</title>
+        <!-- Import Tailwing  -->
+        <link
+            href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+            rel="stylesheet"
+        />
+        <!-- Import AlpineJS -->
+        <script
+            defer
+            src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.3/dist/cdn.min.js"
+        ></script>
+
+        <!-- Import Leaflet  -->
+        <link
+            rel="stylesheet"
+            href="https://unpkg.com/leaflet/dist/leaflet.css"
+        />
+        <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+        <!-- Import Fonts  -->
+        <link
+            rel="preconnect"
+            href="https://fonts.googleapis.com"
+        />
+        <link
+            rel="preconnect"
+            href="https://fonts.gstatic.com"
+            crossorigin
+        />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@300;400;500;600;700;800;900&display=swap"
+            rel="stylesheet"
+        />
+        <!-- Import Custom css -->
+        <link
+            rel="stylesheet"
+            href="style.css"
+        />
+    </head>
+    <body class="flex flex-row">
+        <div
+            id="map"
+            class="border-b-4 border-t-4 border-l-4 border-red-500 basis-1/4"
+        ></div>
+
+        <div
+            id="paper"
+            class="flex flex-col border-4 border-red-500"
+        >
+            <!-- About section -->
+            <div
+                x-data="{ open: true }"
+                class="p-4 border-b-4 border-red-500 basis-20"
+            >
+                <div
+                    x-on:click="open = ! open"
+                    class="cursor-pointer transition-all"
+                >
+                    <h4 class="text-4xl leading-none tracking-tight">About</h4>
+                </div>
+                <div
+                    x-show.important="open"
+                    x-transition.duration.500ms
+                    class="p-0 m-0 transition-all"
+                >
+                    <p>
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                        Dolor facere minima laborum? Sit reiciendis deserunt
+                        quas accusantium magnam voluptatibus quos eveniet
+                        officiis, nisi, nam cumque atque facilis dolorem aliquam
+                        adipisci! Lorem ipsum dolor sit, amet consectetur
+                        adipisicing elit. Nihil corporis facere libero, optio
+                        magni eum fugit totam molestias consequuntur, animi
+                        impedit qui repellendus odit ad in, quasi iure aut
+                        illum!Lorem ipsum dolor sit amet consectetur adipisicing
+                        elit. Dolor facere minima laborum? Sit reiciendis
+                        deserunt quas accusantium magnam voluptatibus quos
+                        eveniet officiis, nisi, nam cumque atque facilis dolorem
+                        aliquam adipisci! Lorem ipsum dolor sit, amet
+                        consectetur adipisicing elit. Nihil corporis facere
+                        libero, optio magni eum fugit totam molestias
+                        consequuntur, animi impedit qui repellendus odit ad in,
+                        quasi iure aut illum!Lorem ipsum dolor sit amet
+                        consectetur adipisicing elit. Dolor facere minima
+                        laborum? Sit reiciendis deserunt quas accusantium magnam
+                        voluptatibus quos eveniet officiis, nisi, nam cumque
+                        atque facilis dolorem aliquam adipisci! Lorem ipsum
+                        dolor sit, amet consectetur adipisicing elit. Nihil
+                        corporis facere libero, optio magni eum fugit totam
+                        molestias consequuntur, animi impedit qui repellendus
+                        odit ad in, quasi iure aut illum!
+                    </p>
+                </div>
+            </div>
+            <template
+                x-data="{ posts: [] }"
+                x-init="data = await (await fetch('public/data.json')).json(); 
+            posts = data.posts;
+            console.log(await posts)"
+                x-for="(post, index) in posts"
+                :key="index"
+            >
+                <div
+                    class="p-4 border-b-4 border-red-500 basis-auto flex-none"
+                    x-data="{open:false}"
+                >
+                    <div
+                        x-bind="chapterTitle(index)"
+                        class="cursor-pointer"
+                    >
+                        <h4
+                            class="text-4xl leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white"
+                            x-text="post.title"
+                        ></h4>
+                    </div>
+                </div>
+                <div
+                    x-show.important="open"
+                    x-transition.duration.500ms
+                    class="p-0 m-0 transition-all flex-grow"
+                >
+                    <p
+                        class="mt-4"
+                        x-text="post.text"
+                    ></p>
+                </div>
+            </template>
+        </div>
+
+        <!-- <script src="app.js"></script> -->
+        <script>
+            let map;
+            let imgGroup;
+            let imageOverlays = {};
+            document.addEventListener("DOMContentLoaded", function () {
+                map = L.map("map", {
+                    zoomControl: false,
+                    attributionControl: false,
+                }).setView([37.7749, -122.4194], 13);
+
+                imgGroup = L.featureGroup().addTo(map);
+
+                fetch("./public/data.json")
+                    .then((response) => response.json())
+                    .then((data) => {
+                        data.posts.forEach((entry, i) => {
+                            const imageUrl = entry.image;
+                            const extent = entry.extent;
+
+                            const imageOverlay = L.imageOverlay(imageUrl, [
+                                [extent.southwest[0], extent.southwest[1]],
+                                [extent.northeast[0], extent.northeast[1]],
+                            ]);
+
+                            const uniqueId = L.stamp(imageOverlay);
+                            imageOverlays[uniqueId] = imageOverlay;
+
+                            imageOverlay.addTo(imgGroup);
+                        });
+
+                        map.fitBounds(imgGroup.getBounds());
+                    })
+                    .catch((error) =>
+                        console.error("Error loading JSON:", error)
+                    );
+            });
+
+            document.addEventListener("alpine:init", () => {
+                async function initData() {
+                    try {
+                        const response = await fetch("public/data.json");
+                        const data = await response.json();
+                        posts = data.posts;
+
+                        // Update the Alpine.js data
+                        Alpine.data("x-data").$data.posts = posts;
+
+                        // Rest of the code for adding images to the map goes here...
+                    } catch (error) {
+                        console.error("Error loading JSON:", error);
+                    }
+                }
+
+                console.log("init");
+                function zoomToImage(index) {
+                    const uniqueId = Object.keys(imageOverlays)[index];
+                    const imageOverlay = imageOverlays[uniqueId];
+                    map.flyToBounds(imageOverlay.getBounds());
+                }
+
+                // function expandFlex(index) {
+                //     this.open = !this.open;
+                //     // const element = document.getElementsByClassName(
+                //     //     "flex-auto"
+                //     // )[index];
+                //     // element.style.height = "auto";
+                //     console.log("gu");
+                // }
+
+                Alpine.bind("chapterTitle", (index) => ({
+                    type: "div",
+
+                    "@click"() {
+                        zoomToImage(index);
+                        // expandFlex(index);
+                        this.open = !this.open;
+                    },
+                }));
+            });
+        </script>
+    </body>
+</html>

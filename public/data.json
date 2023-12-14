@@ -1,0 +1,84 @@
+{
+    "posts": [
+        {
+            "title": "On the Island of Surveillance",
+            "author": "Anne Doe",
+            "image": "./public/test.png",
+            "extent": {
+                "southwest": [37.7749, -122.4194],
+                "northeast": [37.8049, -122.3894]
+            },
+            "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla euismod, nisl quis ultricies ultricies, nunc nisl ultricies nunc, vitae ultricies"
+        },
+        {
+            "title": "Exploring Hidden Valleys",
+            "author": "John Smith",
+            "image": "./public/test.png",
+            "extent": {
+                "southwest": [37.7849, -122.4094],
+                "northeast": [37.8149, -122.3794]
+            },
+            "text": "Suspendisse vel mauris at lectus tristique fringilla. Vivamus commodo, lectus eu sodales elementum, mi quam semper libero, ut consectetur erat nibh id libero."
+        },
+        {
+            "title": "Sunset on the Horizon",
+            "author": "Emily Johnson",
+            "image": "./public/test.png",
+            "extent": {
+                "southwest": [37.7949, -122.3994],
+                "northeast": [37.8249, -122.3694]
+            },
+            "text": "In id magna id velit laoreet tristique. Vivamus bibendum, felis eu pellentesque cursus, nulla libero fermentum leo, vitae venenatis libero metus vel nulla."
+        },
+        {
+            "title": "Jungle Adventures",
+            "author": "Michael Brown",
+            "image": "./public/test.png",
+            "extent": {
+                "southwest": [37.8049, -122.3894],
+                "northeast": [37.8349, -122.3594]
+            },
+            "text": "Curabitur ac leo ut dolor porta aliquet. Fusce ultricies ante ut velit facilisis, vel cursus magna dignissim. Proin consectetur purus sit amet efficitur varius."
+        },
+        {
+            "title": "Mountains of Mystery",
+            "author": "Sophia Davis",
+            "image": "./public/test.png",
+            "extent": {
+                "southwest": [37.8149, -122.3794],
+                "northeast": [37.8449, -122.3494]
+            },
+            "text": "Quisque auctor, lectus vel tincidunt dignissim, purus justo eleifend ex, at facilisis nisl purus vitae libero. Ut id accumsan enim, ut varius tortor."
+        },
+        {
+            "title": "City Lights",
+            "author": "Robert White",
+            "image": "./public/test.png",
+            "extent": {
+                "southwest": [37.8249, -122.3694],
+                "northeast": [37.8549, -122.3394]
+            },
+            "text": "Pellentesque eget mi vitae elit tristique egestas. Nam vel sapien vel arcu gravida aliquet. Maecenas aliquam, turpis eu tempus volutpat, justo urna cursus ex."
+        },
+        {
+            "title": "Coastal Serenity",
+            "author": "Ava Miller",
+            "image": "./public/test.png",
+            "extent": {
+                "southwest": [37.8349, -122.3594],
+                "northeast": [37.8649, -122.3294]
+            },
+            "text": "Duis vel hendrerit ligula. Suspendisse vitae aliquet leo. Nunc ac neque ut libero sollicitudin ullamcorper. Nulla facilisi. Praesent euismod efficitur ipsum at egestas."
+        },
+        {
+            "title": "Mystical Forest",
+            "author": "Daniel Taylor",
+            "image": "./public/test.png",
+            "extent": {
+                "southwest": [37.8449, -122.3494],
+                "northeast": [37.8749, -122.3194]
+            },
+            "text": "Vivamus sed metus in odio bibendum tincidunt. Ut fermentum, purus eu congue pellentesque, quam libero tristique purus, ut volutpat purus orci et velit."
+        }
+    ]
+}
