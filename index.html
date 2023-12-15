@@ -102,13 +102,13 @@
                     :key="index"
                 >
                     <div
-                        class="p-4 border-r-4 border-blue-500 bg-slate-50 bottom-0"
-                        :class="{ 'border-b-4 ': index < posts.length - 1, 'overflow-hidden text-blue-500  hover:h-auto' : squeezed==true && open !== index }"
+                        class="p-4 border-r-4 border-blue-500 bg-slate-50 top-0"
+                        :class="{ 'border-b-4 ': index < posts.length - 1, 'overflow-hidden text-blue-500  hover:h-auto h-10' : squeezed==true && open !== index }"
                     >
                         <div
                             x-bind="chapterTitle(index)"
                             class="cursor-pointer"
-                            x-on:click="open === index ? open = null  : (squeezed=true , open = index);"
+                            x-on:click="open === index ? (squeezed=false, open = null)  : (squeezed=true , open = index);"
                         >
                             <h4
                                 class="text-4xl md:text-5xl lg:text-6xl"
