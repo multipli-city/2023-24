@@ -31,14 +31,10 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 document.addEventListener("alpine:init", () => {
-    async function initData() {
-        try {
-            const response = await fetch("public/data.json");
-            const data = await response.json();
-            posts = data.posts;
-            Alpine.data("x-data").$data.posts = posts;
-        } catch (error) {
-            console.error("Error loading JSON:", error);
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
         }
     }
 
