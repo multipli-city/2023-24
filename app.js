@@ -5,9 +5,26 @@ document.addEventListener("DOMContentLoaded", function () {
     map = L.map("map", {
         zoomControl: false,
         attributionControl: false,
-    }).setView([37.7749, -122.4194], 13);
+    });
 
-    imgGroup = L.featureGroup().addTo(map);
+    imgGroup = L.featureGroup();
+
+    // var basemap = L.tileLayer(
+    //     "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+    //     {
+    //         maxZoom: 19,
+    //         attribution:
+    //             '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    //     }
+    // );
+    const basemap = L.tileLayer("./public/tiles/{z}/{x}/{y}.png", {
+        maxZoom: 14,
+        minZoom: 8,
+    });
+
+    map.addLayer(basemap);
+    // imgGroup = L.featureGroup().addTo(map);
+    imgGroup = L.featureGroup();
 
     fetch("./public/data.json")
         .then((response) => response.json())
