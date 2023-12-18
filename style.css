@@ -16,12 +16,6 @@ body {
     overflow-x: hidden;
 }
 
-.bggrid {
-    background-image: url("./public/grid.png");
-    /* background-color: slategrey; */
-    background-size: 100px 100px;
-}
-
 .h1 {
     font-style: bold;
 }
@@ -42,4 +36,9 @@ body {
 
 *::-webkit-scrollbar-thumb:hover {
     background-color: #222;
+}
+
+::selection {
+    background: rgb(59 130 246);
+    color: white;
 }

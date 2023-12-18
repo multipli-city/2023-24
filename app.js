@@ -7,46 +7,27 @@ document.addEventListener("DOMContentLoaded", function () {
         attributionControl: false,
     });
 
-    imgGroup = L.featureGroup();
-
-    // var basemap = L.tileLayer(
-    //     "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
-    //     {
-    //         maxZoom: 19,
-    //         attribution:
-    //             '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-    //     }
-    // );
+    // add tiles
     const basemap = L.tileLayer("./public/tiles/{z}/{x}/{y}.png", {
         maxZoom: 14,
         minZoom: 8,
     });
-
     map.addLayer(basemap);
-    // imgGroup = L.featureGroup().addTo(map);
-    imgGroup = L.featureGroup();
 
-    fetch("./public/data.json")
-        .then((response) => response.json())
-        .then((data) => {
-            data.posts.forEach((entry, i) => {
-                const imageUrl = entry.image;
-                const extent = entry.extent;
+    // load logo
+    const logoUrl = "./public/logo.png";
+    const extent = {
+        southwest: [0.368963, 0.442059],
+        northeast: [0.489495, 0.658653],
+    };
+    const logoImg = L.imageOverlay(logoUrl, [
+        [extent.southwest[0], extent.southwest[1]],
+        [extent.northeast[0], extent.northeast[1]],
+    ]);
 
-                const imageOverlay = L.imageOverlay(imageUrl, [
-                    [extent.southwest[0], extent.southwest[1]],
-                    [extent.northeast[0], extent.northeast[1]],
-                ]);
-
-                const uniqueId = L.stamp(imageOverlay);
-                imageOverlays[uniqueId] = imageOverlay;
-
-                imageOverlay.addTo(imgGroup);
-            });
-
-            map.fitBounds(imgGroup.getBounds());
-        })
-        .catch((error) => console.error("Error loading JSON:", error));
+    // fit to logo
+    logoImg.addTo(map);
+    map.fitBounds(logoImg.getBounds());
 });
 
 document.addEventListener("alpine:init", () => {
@@ -62,9 +43,14 @@ document.addEventListener("alpine:init", () => {
     }
 
     function zoomToImage(index) {
-        const uniqueId = Object.keys(imageOverlays)[index];
-        const imageOverlay = imageOverlays[uniqueId];
-        map.flyToBounds(imageOverlay.getBounds(), {});
+        const extent = data.posts[index].extent;
+        map.flyToBounds(
+            [
+                [extent.southwest[0], extent.southwest[1]],
+                [extent.northeast[0], extent.northeast[1]],
+            ],
+            {}
+        );
     }
 
     Alpine.bind("chapterTitle", (index) => ({
