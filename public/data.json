@@ -5,8 +5,8 @@
             "author": "Eloïse Vo",
             "image": "./public/images/The_missing_picture.png",
             "extent": {
-                "southwest": [0.255368, 0.010462],
-                "northeast": [0.521672, 0.386944]
+                "southwest": [0.226932, 0.122379],
+                "northeast": [0.555998, 0.35506]
             },
             "text": [
                 "From (data) extraction at the edge of the human, toward an aesthetic of productive lethargy. By means of combining and analyzing unprecedented amounts of data, databases became new modes of knowing the world and knowing ourselves. Databases stabilize and materialize social forces as well as organizational and political logic. There are the results of a multitude of administrative practices, labor, scripted gestures and gendered and racialized bodies that have shaped the very material of today's algorithmic governance. While the body of workers is usually obfuscated by the myth of automation, performing artificial-artificial intelligence, I would like to trace the cognitive operations that are organized by data extraction processes.",
@@ -40,8 +40,8 @@
             "author": "Mikhael Johanes",
             "image": "./public/images/Machine_Derive.png",
             "extent": {
-                "southwest": [0.545586, 0.718059],
-                "northeast": [0.785475, 0.887698]
+                "southwest": [0.568778, 0.755275],
+                "northeast": [0.819824, 0.9006]
             },
             "text": [
                 "Street view imagery (SVI) has gained more importance in urban analytics for deriving insight and informing decision-making. The appeal of the SVI is that it provides a proxy that 'mirrors' the world at the street level and provides information that can never be readable from a top-down, cartographic representation. There are growing numbers of research and urban analytics utilizing SVI data, including the cataloging or mapping urban infrastructure, measuring the city's well-being indicators, and characterizing city streetscapes (Biljecki & Ito, 2021). SVI data was also used to predict the demographic characteristic of a neighborhood by using deep learning to make connections between the demographic data and the visual information from the streets (Gebru et al., 2017), demonstrating the power of SVI, which raises concerns of many.",
