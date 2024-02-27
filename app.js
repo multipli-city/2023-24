@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // add tiles
     const basemap = L.tileLayer("./public/tiles/{z}/{x}/{y}.png", {
         maxZoom: 14,
-        minZoom: 7,
+        minZoom: 8,
     });
     map.addLayer(basemap);
 
