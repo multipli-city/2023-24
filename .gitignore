@@ -1,4 +1,6 @@
 public/tiles_grid
 app_bk.js
 public/images
-processing
+processing/env_multiplicity
+processing/georefs
+processing/imgs
